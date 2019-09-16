@@ -13,6 +13,6 @@ npm i
 ### About the project
 
 - Uses parcel.js, react, with hooks, axios, and styled-components
-- For the info Ergast Developer API is being used with axios. For now only the race year is searchable will add a way to search drivers as well
+- For the info Ergast Developer API is being used with axios. For now only the race year is searchable
 - Great for anyone who likes f-1 
-- in the early stages needs to by styled and cleaned up
+- in the early stages needs to by cleaned up, and add drivers to race year

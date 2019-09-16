@@ -10,7 +10,8 @@ const initialState = {
     fail: 0
   },
   status: "INITIAL",
-  races: []
+  races: [],
+  drivers: []
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);
