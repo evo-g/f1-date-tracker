@@ -1,5 +1,26 @@
 import axios from "axios";
-import { async } from "q";
+
+export const getDriversStandingsByYearAndRound = (store, year, round, response = axios) => {
+  store.actions.counter.addRequest();
+  const status = "LOADING";
+  store.setState({ status });
+  
+  response
+    .get(`https://ergast.com/api/f1/${year}/${round}/results.json`)
+    .then(res => {
+      const raceResults = res.data.MRData.RaceTable.Races[0].Results
+      const isRaceResultsEmpty = raceResults.length == 0;
+      const status = isRaceResultsEmpty ? "EMPTY" : "SUCCESS";
+      store.setState({ raceResults, status });
+      store.actions.counter.addSuccess();
+    })
+    .catch(error => {
+      const isError404 = error.res && res.status === 404;
+      const status = isError404 ? "NOT_FOUND" : "ERROR";
+      store.setState({ status });
+      store.actions.counter.addFail();
+    })
+};
 
 export const getRacesByYear = (store, year, response = axios) => {
   store.actions.counter.addRequest();
@@ -14,6 +35,7 @@ export const getRacesByYear = (store, year, response = axios) => {
       store.setState({ races, status });
       store.actions.counter.addSuccess();
     })
+
     .catch(error => {
       const isError404 = error.res && res.status === 404;
       const status = isError404 ? "NOT_FOUND" : "ERROR";
@@ -22,26 +44,10 @@ export const getRacesByYear = (store, year, response = axios) => {
     });
 };
 
-export const getDriversFromYear = (store, year, response = axios) => {
-  store.actions.counter.addRequest();
-  const status = "LOADING";
-  store.setState({ status });
-  response
-    .get(`https://ergast.com/api/f1/${year}/drivers.json`)
-    .then(res => {
-      const drivers = res.data.MRData.DriverTable.DriversTable;
-      const isDriversEmpty = drivers.length == 0;
-      const status = isDriversEmpty ? "EMPTY" : "SUCCESS";
-      store.setState({ drivers, status });
-      store.actions.counter.addSuccess();
-    })
-    .catch(error => {
-      const isError404 = error.res && res.status === 404;
-      const status = isError404 ? "NOT_FOUND" : "ERROR";
-      store.setState({ status });
-      store.actions.counter.addFail();
-    })
-};
+// getRace = index => {
+//   const selectRace = store.races.find(item => item.index === index);
+//   return selectRace;
+// };
 
 // export const getRacesByYear =  (store, year, request = axios) => {
 //   store.actions.counter.addRequest();

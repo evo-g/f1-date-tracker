@@ -8,12 +8,25 @@ const FormWrapper = styled.form`
   align-items: center;
   grid-column: 1/3;
   input {
-    margin: 0 1rem
+    margin: 0 1rem;
+    padding .3rem .5rem .1rem .1rem;
   }
   button {
     background-color: #ff2800;
-    border-radius: .5rem;
+    border-radius: .2rem;
     color: #FFFFFF;
+    border: none;
+    padding: .5rem 1.5rem
+  }
+  button:hover {
+    background-color: #ff2800cf;
+    cursor: pointer;
+  }
+  button:focus {
+    background-color: #ff2800cf;
+    border-radius: .2rem;
+    border: none;
+    outline: none;
   }
 `
 
@@ -23,7 +36,6 @@ const Counter = () => {
     e.preventDefault();
     const year = e.target.year.value;
     globalActions.formula1.getRacesByYear(year);
-    // globalActions.formula1.getDriversFromYear(year);
   };
   return (
     <FormWrapper onSubmit={searchSubmit}>

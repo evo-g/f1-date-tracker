@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { render } from 'react-dom';
 import SearchRaces from './components/SearchRaces';
 import Races from './components/Races';
-import Drivers from './components/Drivers';
+import RaceResults from './components/RaceResults';
 import Counters from './components/Counters';
 import styled from 'styled-components';
 
@@ -18,7 +18,7 @@ const MainWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
-`
+`;
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
       <SearchRaces />
       <Counters />
       <Races />
-      <Drivers />
+      <RaceResults />
     </MainWrapper>
   );
 }
